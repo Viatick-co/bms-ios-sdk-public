@@ -183,7 +183,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_attribute(external_source_symbol)
 # pragma push_macro("any")
 # undef any
-# pragma clang attribute push(__attribute__((external_source_symbol(language="Swift", defined_in="iOsSDK",generated_declaration))), apply_to=any(function,enum,objc_interface,objc_category,objc_protocol))
+# pragma clang attribute push(__attribute__((external_source_symbol(language="Swift", defined_in="BmsSDK",generated_declaration))), apply_to=any(function,enum,objc_interface,objc_category,objc_protocol))
 # pragma pop_macro("any")
 #endif
 
@@ -192,7 +192,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 
 
-SWIFT_CLASS("_TtC6iOsSDK10ViaBmsCtrl")
+SWIFT_CLASS("_TtC6BmsSDK10ViaBmsCtrl")
 @interface ViaBmsCtrl : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
@@ -201,7 +201,7 @@ SWIFT_CLASS("_TtC6iOsSDK10ViaBmsCtrl")
 
 @class NSCoder;
 
-SWIFT_CLASS("_TtC6iOsSDK24ViaMinisiteTableViewCell")
+SWIFT_CLASS("_TtC6BmsSDK24ViaMinisiteTableViewCell")
 @interface ViaMinisiteTableViewCell : UITableViewCell
 - (void)awakeFromNib;
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated;
@@ -212,7 +212,7 @@ SWIFT_CLASS("_TtC6iOsSDK24ViaMinisiteTableViewCell")
 @class UITableView;
 @class NSBundle;
 
-SWIFT_CLASS("_TtC6iOsSDK30ViaMinisiteTableViewController")
+SWIFT_CLASS("_TtC6BmsSDK30ViaMinisiteTableViewController")
 @interface ViaMinisiteTableViewController : UITableViewController
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder SWIFT_UNAVAILABLE;
@@ -229,7 +229,7 @@ SWIFT_CLASS("_TtC6iOsSDK30ViaMinisiteTableViewController")
 @end
 
 
-SWIFT_CLASS("_TtC6iOsSDK25ViaMinisiteViewController")
+SWIFT_CLASS("_TtC6BmsSDK25ViaMinisiteViewController")
 @interface ViaMinisiteViewController : UIViewController
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
