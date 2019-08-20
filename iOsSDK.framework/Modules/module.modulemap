@@ -1,0 +1,11 @@
+framework module iOsSDK {
+  umbrella header "iOsSDK.h"
+
+  export *
+  module * { export * }
+}
+
+module iOsSDK.Swift {
+    header "iOsSDK-Swift.h"
+    requires objc
+}
