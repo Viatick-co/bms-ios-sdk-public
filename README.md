@@ -1,15 +1,11 @@
-# BMS IOS SDK
-
-> Cordova SDK link https://github.com/Viatick-co/bms-cordova-sdk-public
-
 ### XCode Application Frameworks
 * UserNotifications.framework
 * CoreLocation.framework
 * NotificationCenter.framework
 
 ### Installation
-* Download the [source.zip](https://github.com/Viatick-co/bms-ios-sdk-public/archive/master.zip) code from Github
-* Link `SDK_SRC` files in your XCode iOS project
+* Download the `BmSDK.framework` from Github
+* Link the framework `BmsSDK.framework` in your project. `Project target -> Under Embedded Binaries -> '+' Sign`
 * Make sure `Info.plist` file has the following setting
 ```xml
 <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
@@ -19,7 +15,9 @@
 <key>NSLocationAlwaysUsageDescription</key>
 <string>description for location access</string>
 ```
-* Enable `Location updates` in `Background Modes` under `Capabilities` tag
+*  under `Capabilities` tag 
+Enable `Location updates` in `Background Modes`
+Enable `Add the Push Notifcations...` in `Push Notifications`
 
 ### Setup
 ##### Sample setup codes in ViewController
