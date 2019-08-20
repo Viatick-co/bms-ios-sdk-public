@@ -20,13 +20,19 @@
 * Enable `Add the Push Notifcations...` in `Push Notifications`
 
 ### Setup
+
+##### Import SDK in ViewController
+`Import BmsSDK`
+
 ##### Sample setup codes in ViewController
+
 `swift 3`
 ```swift
 class ViewController: UIViewController {
 
-	// Some codes...
+    // Some codes...
     
+    // declare instance of bms controller
     let viaBmsCtrl = ViaBmsCtrl.sharedInstance;
 
     override func viewDidLoad() {
@@ -34,40 +40,74 @@ class ViewController: UIViewController {
 
         // Some codes...
 
-        // optional delegate
+        // configure bms sdk settings at first
+        // to enable alert
+        // to enable minisite feature and type of view (AUTO or LIST)
+        // to enable customer tracking feature
+        // to enable customer attendance feature
+        viaBmsCtrl.setting(alert: true, background: true, site: true, minisitesView: .LIST, autoSiteDuration: 0, tracking: true, enableMQTT: false, attendance: true, checkinDuration: 2, checkoutDuration: 2);
+	
+	// optional to attach delegate
+        // 4 callbacks
+        // sdkInited
+        // customerInited
+        // if attendance is enable
+        // checkin and checkout
         viaBmsCtrl.delegate = self;
-
-        // you can specify your customer information in order to enable attendance and tracking feature (optional)
-        viaBmsCtrl.initCustomer(identifier: "qe7sua", phone: "9069xxxx", email: "customer@example.com");
-
-        // bms sdk setting (setting can change later and default values are false)
-        viaBmsCtrl.setting(alert: true, background: true, site: true, attendance: true, tracking: true);
-
-        // initiate viatick bms sdk with your bms application sdk key (this function will not start the sdk service)
+	
+        // this method must be called at first to do handshake with bms
+        // sdkInited callback will be called
         viaBmsCtrl.initSdk(uiViewController: self, sdk_key: "PASTE_YOUR_BMS_APP_SDK_KEY_HERE");
 
         // Some codes...
     }
 
-    // Some codes...
+    // start sdk servicaze
+    @IBAction func startSDK(sender: UIButton) {
+        // these methods are to check sdk initation and bms is running or not
+        let bmsRunning = viaBmsCtrl.isBmsRunning();
+        let sdkInited = viaBmsCtrl.isSdkInited();
 
-    // start sdk service
-    @IBAction func startSDK(_ sender: Any) {
-        viaBmsCtrl.startBmsService();
+        if (!bmsRunning && sdkInited) {
+            // this method is to start bms service if it is not running
+            // you can call this method to restart without calling initSdk again
+            viaBmsCtrl.startBmsService();
+        }
     }
     
     // end sdk service
-    @IBAction func stopSDK(_ sender: Any) {
+    @IBAction func stopSDK(sender: UIButton) {
+        // this method is to stop the bms service
         viaBmsCtrl.stopBmsService();
     }
 
     // Some codes...
-
 }
 
+// implement delegate of bms here
 extension ViewController: ViaBmsCtrlDelegate {
-    func viaBmsCtrl(controller: ViaBmsCtrl, inited status: Bool) {
-        print("inited", status);
+    
+    // this will be called when sdk is inited
+    // list of zones in the sdk application is passed here
+    func sdkInited(inited status: Bool, zones: [ViaZone]) {
+        print("sdk inited", status);
+        
+        
+        // this method must be called in order to enable attendance and tracking feature
+        // authorizedZones is optional field
+        viaBmsCtrl.initCustomer(identifier: "PASTE IDENTIFIER OF CUSTOMER HERE", email: "example@email.com", phone: "+000000000", remark: "Device info!", authorizedZones: zones);
+    }
+    
+    func customerInited(inited: Bool) {
+        print("customer inited", inited);
+    }
+    
+    func checkin() {
+        print("check in callback");
+    }
+    
+    func checkout() {
+        print("check out callback");
     }
 }
 ```
