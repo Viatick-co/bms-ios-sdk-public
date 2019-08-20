@@ -15,7 +15,7 @@
 <key>NSLocationAlwaysUsageDescription</key>
 <string>description for location access</string>
 ```
-###  Under `Capabilities` tag
+##### Under `Capabilities` tag
 * Enable `Location updates` in `Background Modes`
 * Enable `Add the Push Notifcations...` in `Push Notifications`
 
