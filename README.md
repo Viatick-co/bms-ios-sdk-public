@@ -62,7 +62,7 @@ class ViewController: UIViewController {
         // Some codes...
     }
 
-    // start sdk servicaze
+    // start sdk service
     @IBAction func startSDK(sender: UIButton) {
         // these methods are to check sdk initation and bms is running or not
         let bmsRunning = viaBmsCtrl.isBmsRunning();
@@ -92,9 +92,9 @@ extension ViewController: ViaBmsCtrlDelegate {
     func sdkInited(inited status: Bool, zones: [ViaZone]) {
         print("sdk inited", status);
         
-        
         // this method must be called in order to enable attendance and tracking feature
         // authorizedZones is optional field
+	// sdkInited callback will be called after initialization
         viaBmsCtrl.initCustomer(identifier: "PASTE IDENTIFIER OF CUSTOMER HERE", email: "example@email.com", phone: "+000000000", remark: "Device info!", authorizedZones: zones);
     }
     
