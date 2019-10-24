@@ -40,12 +40,16 @@ class ViewController: UIViewController {
 
         // Some codes...
 
+	var requestDistanceBeacons:[IBeacon] = [];
+        let beacon:IBeacon = IBeacon(uuid: "uuid", major: 40, minor: 50);
+
         // configure bms sdk settings at first
         // to enable alert
         // to enable minisite feature and type of view (AUTO or LIST)
         // to enable customer tracking feature
         // to enable customer attendance feature
-        viaBmsCtrl.setting(alert: true, background: true, site: true, minisitesView: .LIST, autoSiteDuration: 0, tracking: true, enableMQTT: false, attendance: true, checkinDuration: 2, checkoutDuration: 2);
+	// to enable distance tracking then pass list of IBeacon, otherwise just pass null
+        viaBmsCtrl.setting(alert: true, background: true, site: true, minisitesView: .LIST, autoSiteDuration: 0, tracking: true, enableMQTT: false, attendance: true, checkinDuration: 2, checkoutDuration: 2, requestDistanceBeacons: requestDistanceBeacons, bmsEnvironment: .DEV);
 	
 	// optional to attach delegate
         // 4 callbacks
@@ -108,6 +112,10 @@ extension ViewController: ViaBmsCtrlDelegate {
     
     func checkout() {
         print("check out callback");
+    }
+    
+    // it is callback of request tracking beacons
+    func onDistanceBeacons(beacons: [IBeacon]) {
     }
 }
 ```
