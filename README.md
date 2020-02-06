@@ -14,6 +14,10 @@
 <string>description for location access</string>
 <key>NSLocationAlwaysUsageDescription</key>
 <string>description for location access</string>
+<key>NSBluetoothAlwaysUsageDescription</key>
+<string>We need bluetooth permission to broadcast data.</string>
+<key>NSBluetoothPeripheralUsageDescription</key>
+<string>We need bluetooth permission to broadcast data.</string>
 ```
 ##### Under `Capabilities` tag
 * Enable `Location updates` in `Background Modes`
