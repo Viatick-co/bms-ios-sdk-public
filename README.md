@@ -30,7 +30,6 @@
 
 ##### Sample setup codes in ViewController
 
-`swift 3`
 ```swift
 class ViewController: UIViewController {
 
@@ -44,25 +43,27 @@ class ViewController: UIViewController {
 
         // Some codes...
 
-	var requestDistanceBeacons:[IBeacon] = [];
-        let beacon:IBeacon = IBeacon(uuid: "uuid", major: 40, minor: 50);
+        var requestDistanceBeacons:[IBeacon] = [];
+        // let beacon:IBeacon = IBeacon(uuid: "uuid", major: 40, minor: 50);
 
         // configure bms sdk settings at first
         // to enable alert
         // to enable minisite feature and type of view (AUTO or LIST)
         // to enable customer tracking feature
         // to enable customer attendance feature
-	// to enable distance tracking then pass list of IBeacon, otherwise just pass null
-        viaBmsCtrl.setting(alert: true, background: true, site: true, minisitesView: .LIST, autoSiteDuration: 0, tracking: true, enableMQTT: false, attendance: true, checkinDuration: 2, checkoutDuration: 2, requestDistanceBeacons: requestDistanceBeacons, bmsEnvironment: .DEV);
-	
-	// optional to attach delegate
+        // to enable distance tracking then pass list of IBeacon, otherwise just pass null
+        // to enable broadcasst
+        // to enable proximity alert
+        viaBmsCtrl.setting(alert: false, background: true, site: false, minisitesView: .LIST, autoSiteDuration: 0, tracking: false, enableMQTT: false, attendance: false, checkinDuration: 20, checkoutDuration: 20, requestDistanceBeacons: requestDistanceBeacons, bmsEnvironment: .DEV, beaconRegionRange: 10, beaconRegionUUIDFilter: true, isBroadcasting: true, proximityAlert: true, proximityAlertThreshold: 20);
+    
+    // optional to attach delegate
         // 4 callbacks
         // sdkInited
         // customerInited
         // if attendance is enable
         // checkin and checkout
         viaBmsCtrl.delegate = self;
-	
+    
         // this method must be called at first to do handshake with bms
         // sdkInited callback will be called
         viaBmsCtrl.initSdk(uiViewController: self, sdk_key: "PASTE_YOUR_BMS_APP_SDK_KEY_HERE");
@@ -102,7 +103,7 @@ extension ViewController: ViaBmsCtrlDelegate {
         
         // this method must be called in order to enable attendance and tracking feature
         // authorizedZones is optional field
-	// sdkInited callback will be called after initialization
+    // sdkInited callback will be called after initialization
         viaBmsCtrl.initCustomer(identifier: "PASTE IDENTIFIER OF CUSTOMER HERE", email: "example@email.com", phone: "+000000000", remark: "Device info!", authorizedZones: zones);
     }
     
@@ -116,6 +117,10 @@ extension ViewController: ViaBmsCtrlDelegate {
     
     func checkout() {
         print("check out callback");
+    }
+    
+    func onProximityAlert() {
+        print("onProximityAlert");
     }
     
     // it is callback of request tracking beacons
