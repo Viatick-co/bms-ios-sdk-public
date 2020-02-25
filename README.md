@@ -34,7 +34,7 @@
 class ViewController: UIViewController {
 
     // Some codes...
-    
+
     // declare instance of bms controller
     let viaBmsCtrl = ViaBmsCtrl.sharedInstance;
 
@@ -66,7 +66,7 @@ class ViewController: UIViewController {
         proximityAlert: true, // set it to true to enable alert when proximity period with a filtered device exceed proximityAlertThreshold
         proximityAlertThreshold: 120 // minimum how long is the proximity period, in seconds
         );
-    
+
     // optional to attach delegate
         // 4 callbacks
         // sdkInited
@@ -74,7 +74,7 @@ class ViewController: UIViewController {
         // if attendance is enable
         // checkin and checkout
         viaBmsCtrl.delegate = self;
-    
+
         // this method must be called at first to do handshake with bms
         // sdkInited callback will be called
         viaBmsCtrl.initSdk(uiViewController: self, sdk_key: "PASTE_YOUR_BMS_APP_SDK_KEY_HERE");
@@ -94,11 +94,19 @@ class ViewController: UIViewController {
             viaBmsCtrl.startBmsService();
         }
     }
-    
+
     // end sdk service
     @IBAction func stopSDK(sender: UIButton) {
         // this method is to stop the bms service
         viaBmsCtrl.stopBmsService();
+    }
+
+    // open a minisite url (from NFC Tag or others) as a minisite on the same app
+    @IBAction func openDeviceSite(sender: UIButton) {
+        // this method is to stop the bms service
+        let url = "https://DEVICE_SITE_URL";
+
+        viaBmsCtrl.openDeviceSite(url);
     }
 
     // Some codes...
@@ -106,36 +114,41 @@ class ViewController: UIViewController {
 
 // implement delegate of bms here
 extension ViewController: ViaBmsCtrlDelegate {
-    
+
     // this will be called when sdk is inited
     // list of zones in the sdk application is passed here
     func sdkInited(inited status: Bool, zones: [ViaZone]) {
         print("sdk inited", status);
-        
+
         // this method must be called in order to enable attendance and tracking feature
         // authorizedZones is optional field
     // sdkInited callback will be called after initialization
         viaBmsCtrl.initCustomer(identifier: "PASTE IDENTIFIER OF CUSTOMER HERE", email: "example@email.com", phone: "+000000000", remark: "Device info!", authorizedZones: zones);
     }
-    
+
     func customerInited(inited: Bool) {
         print("customer inited", inited);
     }
-    
+
     func checkin() {
         print("check in callback");
     }
-    
+
     func checkout() {
         print("check out callback");
     }
-    
+
     func onProximityAlert() {
         print("onProximityAlert");
     }
-    
+
     // it is callback of request tracking beacons
     func onDistanceBeacons(beacons: [IBeacon]) {
+    }
+
+    // callback when a device site is loaded, error code will be returned if failed
+    func deviceSiteLoaded(loaded: Bool, error: String?) {
+
     }
 }
 ```
