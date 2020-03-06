@@ -56,7 +56,7 @@ class ViewController: UIViewController {
         tracking: false, // whether to enable tracking feature and send tracking data to BMS
         enableMQTT: false, // whether to use MQTT or normal RESTful endpoint to send tracking data
         attendance: false, // whether to enable attendance feature
-        checkinDuration: 5, // duration of the device staying in the authorized zones to be considered
+        checkinDuration: 5, // duration of the device staying in the authorized zones to be considered "checked in"
         checkoutDuration: 20, // duration of the device staying out of the authorized zones to be considered "checked out"
         requestDistanceBeacons: requestDistanceBeacons, // ibeacons that you want to return distance callback
         bmsEnvironment: .DEV, // BMS environment, default is "PROD"
