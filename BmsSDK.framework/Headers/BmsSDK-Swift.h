@@ -209,17 +209,35 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+typedef SWIFT_ENUM(NSInteger, BmsEnvironment, closed) {
+  BmsEnvironmentDEV = 0,
+  BmsEnvironmentCHINA = 1,
+  BmsEnvironmentPROD = 2,
+};
+
+typedef SWIFT_ENUM(NSInteger, MinisiteViewType, closed) {
+  MinisiteViewTypeLIST = 0,
+  MinisiteViewTypeAUTO = 1,
+};
 
 
 
 
 
 
+
+@class NSArray;
+@class UIViewController;
 @class NSTimer;
 
 SWIFT_CLASS("_TtC6BmsSDK10ViaBmsCtrl")
 @interface ViaBmsCtrl : NSObject
+- (void)settingObjCWithAlert:(BOOL)alert background:(BOOL)background site:(BOOL)site minisitesView:(enum MinisiteViewType)minisitesView autoSiteDuration:(NSTimeInterval)autoSiteDuration tracking:(BOOL)tracking enableMQTT:(BOOL)enableMQTT attendance:(BOOL)attendance checkinDuration:(NSTimeInterval)checkinDuration checkoutDuration:(NSTimeInterval)checkoutDuration requestDistanceBeacons:(NSArray * _Nonnull)requestDistanceBeacons bmsEnvironment:(enum BmsEnvironment)bmsEnvironment beaconRegionRange:(double)beaconRegionRange beaconRegionUUIDFilter:(BOOL)beaconRegionUUIDFilter isBroadcasting:(BOOL)isBroadcasting proximityAlert:(BOOL)proximityAlert proximityAlertThreshold:(NSTimeInterval)proximityAlertThreshold proximityAwayThreshold:(NSTimeInterval)proximityAwayThreshold proximityRange:(double)proximityRange;
+- (void)initSdkWithUiViewController:(UIViewController * _Nonnull)uiViewController sdk_key:(NSString * _Nonnull)sdk_key SWIFT_METHOD_FAMILY(none);
 - (void)initCustomerObjCWithTimer:(NSTimer * _Nonnull)timer SWIFT_METHOD_FAMILY(none);
+- (void)initCustomerWithIdentifier:(NSString * _Nonnull)identifier email:(NSString * _Nonnull)email phone:(NSString * _Nonnull)phone authorizedZones:(NSArray * _Nonnull)authorizedZones SWIFT_METHOD_FAMILY(none);
+- (void)startBmsService;
+- (void)stopBmsService;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -482,17 +500,35 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+typedef SWIFT_ENUM(NSInteger, BmsEnvironment, closed) {
+  BmsEnvironmentDEV = 0,
+  BmsEnvironmentCHINA = 1,
+  BmsEnvironmentPROD = 2,
+};
+
+typedef SWIFT_ENUM(NSInteger, MinisiteViewType, closed) {
+  MinisiteViewTypeLIST = 0,
+  MinisiteViewTypeAUTO = 1,
+};
 
 
 
 
 
 
+
+@class NSArray;
+@class UIViewController;
 @class NSTimer;
 
 SWIFT_CLASS("_TtC6BmsSDK10ViaBmsCtrl")
 @interface ViaBmsCtrl : NSObject
+- (void)settingObjCWithAlert:(BOOL)alert background:(BOOL)background site:(BOOL)site minisitesView:(enum MinisiteViewType)minisitesView autoSiteDuration:(NSTimeInterval)autoSiteDuration tracking:(BOOL)tracking enableMQTT:(BOOL)enableMQTT attendance:(BOOL)attendance checkinDuration:(NSTimeInterval)checkinDuration checkoutDuration:(NSTimeInterval)checkoutDuration requestDistanceBeacons:(NSArray * _Nonnull)requestDistanceBeacons bmsEnvironment:(enum BmsEnvironment)bmsEnvironment beaconRegionRange:(double)beaconRegionRange beaconRegionUUIDFilter:(BOOL)beaconRegionUUIDFilter isBroadcasting:(BOOL)isBroadcasting proximityAlert:(BOOL)proximityAlert proximityAlertThreshold:(NSTimeInterval)proximityAlertThreshold proximityAwayThreshold:(NSTimeInterval)proximityAwayThreshold proximityRange:(double)proximityRange;
+- (void)initSdkWithUiViewController:(UIViewController * _Nonnull)uiViewController sdk_key:(NSString * _Nonnull)sdk_key SWIFT_METHOD_FAMILY(none);
 - (void)initCustomerObjCWithTimer:(NSTimer * _Nonnull)timer SWIFT_METHOD_FAMILY(none);
+- (void)initCustomerWithIdentifier:(NSString * _Nonnull)identifier email:(NSString * _Nonnull)email phone:(NSString * _Nonnull)phone authorizedZones:(NSArray * _Nonnull)authorizedZones SWIFT_METHOD_FAMILY(none);
+- (void)startBmsService;
+- (void)stopBmsService;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
