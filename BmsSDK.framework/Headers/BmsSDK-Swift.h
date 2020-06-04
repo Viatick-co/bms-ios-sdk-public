@@ -240,6 +240,8 @@ SWIFT_CLASS("_TtC6BmsSDK10ViaBmsCtrl")
 - (void)initCustomerWithIdentifier:(NSString * _Nonnull)identifier email:(NSString * _Nonnull)email phone:(NSString * _Nonnull)phone authorizedZones:(NSArray * _Nonnull)authorizedZones SWIFT_METHOD_FAMILY(none);
 - (void)startBmsService;
 - (void)stopBmsService;
+- (void)destroySDK;
+- (void)onDestroy;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
