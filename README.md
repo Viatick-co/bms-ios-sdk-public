@@ -111,6 +111,13 @@ class ViewController: UIViewController {
         viaBmsCtrl.openDeviceSite(url);
     }
 
+    // open a minisite url (from NFC Tag or others) as a minisite on the same app
+    @IBAction func destroySDK(sender: UIButton) {
+        // destroy the SDK instance so it can be initiated again
+
+        viaBmsCtrl.destroySDK();
+    }
+
     // Some codes...
 }
 
@@ -156,6 +163,14 @@ extension ViewController: ViaBmsCtrlDelegate {
     // call on applicationWillTerminate
     func onDestroy() {
         print("onDestroy");
+    }
+
+    // callback when Bluetooth is powered on
+    func onBluetoothStateOn() {
+    }
+
+    // callback when Bluetooth is powered off
+    func onBluetoothStateOff() {
     }
 }
 ```
