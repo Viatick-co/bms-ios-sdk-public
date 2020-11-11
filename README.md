@@ -172,5 +172,10 @@ extension ViewController: ViaBmsCtrlDelegate {
     // callback when Bluetooth is powered off
     func onBluetoothStateOff() {
     }
+
+    // callback when there's a new zone record added
+    // returns the uuid, major, minor of the beacon as well as the zones that the beacon is associated to
+    func onAddZoneRecord(uuid: String?, major: Int, minor: Int, newZones: [ViaZone]?) {
+    }
 }
 ```
