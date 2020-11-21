@@ -147,10 +147,6 @@ extension ViewController: ViaBmsCtrlDelegate {
         print("check out callback");
     }
 
-    func onProximityAlert() {
-        print("onProximityAlert");
-    }
-
     // it is callback of request tracking beacons
     func onDistanceBeacons(beacons: [IBeacon]) {
     }
@@ -165,11 +161,16 @@ extension ViewController: ViaBmsCtrlDelegate {
         print("onDestroy");
     }
 
-    // callback when Bluetooth is powered on
+    // callback when there's new proximity alert (contact) been established
+    func onNewProximityAlert(uuid: String, major: Int, minor: Int, deviceUUID: String) {
+
+    }
+
+    // callback when Bluetooth state is switched to on
     func onBluetoothStateOn() {
     }
 
-    // callback when Bluetooth is powered off
+    // callback when Bluetooth state is switched to off
     func onBluetoothStateOff() {
     }
 
