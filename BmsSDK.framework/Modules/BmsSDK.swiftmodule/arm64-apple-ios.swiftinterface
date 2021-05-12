@@ -1,0 +1,119 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
+// swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name BmsSDK
+@_exported import BmsSDK
+import CoreBluetooth
+import CoreLocation
+import Foundation
+import NotificationCenter
+import SafariServices
+import Swift
+import UIKit
+import UserNotifications
+import WebKit
+@objc @_hasMissingDesignatedInitializers public class ViaMinisiteTableViewController : UIKit.UITableViewController {
+  @objc dynamic public init()
+  @objc override dynamic public func viewDidLoad()
+  @objc override dynamic public func viewDidAppear(_ animated: Swift.Bool)
+  @objc override dynamic public func viewDidDisappear(_ animated: Swift.Bool)
+  @objc override dynamic public func didReceiveMemoryWarning()
+  @objc override dynamic public func numberOfSections(in tableView: UIKit.UITableView) -> Swift.Int
+  @objc override dynamic public func tableView(_ tableView: UIKit.UITableView, numberOfRowsInSection section: Swift.Int) -> Swift.Int
+  @objc override dynamic public func tableView(_ tableView: UIKit.UITableView, cellForRowAt indexPath: Foundation.IndexPath) -> UIKit.UITableViewCell
+  @objc override dynamic public func tableView(_ tableView: UIKit.UITableView, didSelectRowAt indexPath: Foundation.IndexPath)
+  @objc deinit
+  @objc override dynamic public init(style: UIKit.UITableView.Style)
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+}
+public protocol ViaBmsCtrlDelegate {
+  func sdkInited(inited status: Swift.Bool, zones: [BmsSDK.ViaZone])
+  func customerInited(inited: Swift.Bool)
+  func checkin()
+  func checkout()
+  func onProximityAlert()
+  func onDistanceBeacons(beacons: [BmsSDK.IBeacon])
+  func onNewProximityAlert(uuid: Swift.String, major: Swift.Int, minor: Swift.Int, deviceUUID: Swift.String)
+  func onBluetoothStateOn()
+  func onBluetoothStateOff()
+  func onAddZoneRecord(uuid: Swift.String?, major: Swift.Int, minor: Swift.Int, newZones: [BmsSDK.ViaZone]?)
+}
+@objc @_inheritsConvenienceInitializers open class ViaBmsCtrl : ObjectiveC.NSObject {
+  public static let sharedInstance: BmsSDK.ViaBmsCtrl
+  public var delegate: BmsSDK.ViaBmsCtrlDelegate?
+  public func setting(alert: Swift.Bool, background: Swift.Bool, site: Swift.Bool, minisitesView: BmsSDK.MinisiteViewType, autoSiteDuration: Foundation.TimeInterval, tracking: Swift.Bool, enableMQTT: Swift.Bool, attendance: Swift.Bool, checkinDuration: Foundation.TimeInterval?, checkoutDuration: Foundation.TimeInterval?, requestDistanceBeacons: [BmsSDK.IBeacon]?, bmsEnvironment: BmsSDK.BmsEnvironment, beaconRegionRange: Swift.Double?, beaconRegionUUIDFilter: Swift.Bool, isBroadcasting: Swift.Bool, proximityAlert: Swift.Bool, proximityAlertThreshold: Foundation.TimeInterval?, proximityAwayThreshold: Foundation.TimeInterval?, proximityRange: Swift.Double?)
+  @objc public func settingObjC(alert: Swift.Bool, background: Swift.Bool, site: Swift.Bool, minisitesView: BmsSDK.MinisiteViewType, autoSiteDuration: Foundation.TimeInterval, tracking: Swift.Bool, enableMQTT: Swift.Bool, attendance: Swift.Bool, checkinDuration: Foundation.TimeInterval, checkoutDuration: Foundation.TimeInterval, requestDistanceBeacons: Foundation.NSArray, bmsEnvironment: BmsSDK.BmsEnvironment, beaconRegionRange: Swift.Double, beaconRegionUUIDFilter: Swift.Bool, isBroadcasting: Swift.Bool, proximityAlert: Swift.Bool, proximityAlertThreshold: Foundation.TimeInterval, proximityAwayThreshold: Foundation.TimeInterval, proximityRange: Swift.Double)
+  @objc public func initSdk(uiViewController: UIKit.UIViewController, sdk_key: Swift.String)
+  public func isSdkInited() -> Swift.Bool
+  @objc public func initCustomerObjC(timer: Foundation.Timer)
+  @objc public func initCustomer(identifier: Swift.String, email: Swift.String, phone: Swift.String, authorizedZones: Foundation.NSArray)
+  public func isCustomerInited() -> Swift.Bool
+  @objc public func startBmsService()
+  @objc public func stopBmsService()
+  @objc public func destroySDK()
+  @objc public func onDestroy()
+  public func isBmsRunning() -> Swift.Bool
+  @objc deinit
+  @objc override dynamic public init()
+}
+public struct IBeacon {
+  public var uuid: Swift.String
+  public var major: Swift.Int
+  public var minor: Swift.Int
+  public var distance: Swift.Double
+  public var deviceUUID: Swift.String
+  public init(uuid: Swift.String, major: Swift.Int, minor: Swift.Int, deviceUUID: Swift.String)
+  public func getKey() -> Swift.String
+}
+@objc @_inheritsConvenienceInitializers public class ViaMinisiteTableViewCell : UIKit.UITableViewCell {
+  @objc override dynamic public func awakeFromNib()
+  @objc override dynamic public func setSelected(_ selected: Swift.Bool, animated: Swift.Bool)
+  @objc deinit
+  @available(iOS 3.0, *)
+  @objc override dynamic public init(style: UIKit.UITableViewCell.CellStyle, reuseIdentifier: Swift.String?)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+}
+public struct ViaZoneBeacon {
+}
+public struct ViaZone {
+  public var zoneId: Swift.Int
+  public var name: Swift.String?
+  public var remark: Swift.String?
+  public var image: Swift.String?
+  public var beacons: [BmsSDK.ViaZoneBeacon]
+}
+public struct ViaZoneRecord {
+}
+@objc public enum MinisiteViewType : Swift.Int, Swift.RawRepresentable {
+  case LIST
+  case AUTO
+  public typealias RawValue = Swift.String
+  public var rawValue: BmsSDK.MinisiteViewType.RawValue {
+    get
+  }
+  public init?(rawValue: BmsSDK.MinisiteViewType.RawValue)
+}
+@objc public enum BmsEnvironment : Swift.Int, Swift.RawRepresentable {
+  case DEV
+  case CHINA
+  case PROD
+  public typealias RawValue = Swift.String
+  public var rawValue: BmsSDK.BmsEnvironment.RawValue {
+    get
+  }
+  public init?(rawValue: BmsSDK.BmsEnvironment.RawValue)
+}
+@objc public class ViaMinisiteViewController : UIKit.UIViewController {
+  @objc dynamic public init()
+  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc override dynamic public func viewDidLoad()
+  @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
+  @objc override dynamic public func viewDidLayoutSubviews()
+  @objc override dynamic public func viewDidDisappear(_ animated: Swift.Bool)
+  @objc override dynamic public func didReceiveMemoryWarning()
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @objc deinit
+}
+extension BmsSDK.MinisiteViewType : Swift.Equatable {}
+extension BmsSDK.MinisiteViewType : Swift.Hashable {}
+extension BmsSDK.BmsEnvironment : Swift.Equatable {}
+extension BmsSDK.BmsEnvironment : Swift.Hashable {}

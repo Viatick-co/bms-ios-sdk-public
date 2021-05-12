@@ -208,7 +208,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
-typedef SWIFT_ENUM(NSInteger, BmsEnvironment, closed) {
+typedef SWIFT_ENUM(NSInteger, BmsEnvironment, open) {
   BmsEnvironmentDEV = 0,
   BmsEnvironmentCHINA = 1,
   BmsEnvironmentPROD = 2,
@@ -217,7 +217,7 @@ typedef SWIFT_ENUM(NSInteger, BmsEnvironment, closed) {
 
 
 
-typedef SWIFT_ENUM(NSInteger, MinisiteViewType, closed) {
+typedef SWIFT_ENUM(NSInteger, MinisiteViewType, open) {
   MinisiteViewTypeLIST = 0,
   MinisiteViewTypeAUTO = 1,
 };
