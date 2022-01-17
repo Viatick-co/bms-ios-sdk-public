@@ -180,3 +180,161 @@ extension ViewController: ViaBmsCtrlDelegate {
     }
 }
 ```
+
+##### Sample setup map in ViewController
+
+```swift
+class ViewController: UIViewController {
+
+    // Some codes...
+
+    // declare instance of bms controller
+    let viaBmsCtrl = ViaBmsCtrl.sharedInstance;
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Some codes...
+
+        // Attach delegate to listen to callbacks
+        viaBmsCtrl.delegate = self;
+
+        // indicate width and height of the map view. Here we use the width and height of the UI screen bound as example
+        let screenRect = UIScreen.main.bounds
+        let screenWidth = screenRect.size.width
+        let screenHeight = screenRect.size.height
+
+        viaBmsCtrl.initMap(view: self.view!, width: screenWidth, height: screenHeight, sdk_key: "PASTE_YOUR_BMS_APP_SDK_KEY_HERE");
+
+        // Some codes...
+    }
+
+    // add a single marker
+    @IBAction func addMarker(sender: UIButton) {
+        // these methods are to check sdk initation and bms is running or not
+        let bmsRunning = viaBmsCtrl.isBmsRunning();
+        let sdkInited = viaBmsCtrl.isSdkInited();
+
+        if (!bmsRunning && sdkInited) {
+            // this method is to start bms service if it is not running
+            // you can call this method to restart without calling initSdk again
+            viaBmsCtrl.startBmsService();
+        }
+    }
+
+    // add a single marker
+    @IBAction func addMarker(sender: UIButton) {
+        // you can fully custom the html content of your marker
+        viaBmsCtrl.addMarker(zoneName: "Zone A", content: "<p style=\"color: #eb4d4b;\">1</p>")
+    }
+
+    // add a group of markers
+    // MarkerInput class has 2 parameters: zoneName and content. Both are String.
+    @IBAction func addMarkers(sender: UIButton) {
+        // you can fully custom the html content of your marker
+        var markers: [MarkerInput] = []
+        markers.append(MarkerInput(zoneName: "Zone A", content: "<p style=\"color: #eb4d4b;\">1</p>"))
+        markers.append(MarkerInput(zoneName: "Zone B", content: "<p style=\"color: #eb4d4b;\">2</p>"))
+        viaBmsCtrl.addMarkers(markers: markers)
+    }
+
+    // get the list of zones of this application
+    // result won't be returned here but on the onZonesLoaded callback below
+    @IBAction func getZones(sender: UIButton) {
+        viaBmsCtrl.getZones()
+    }
+
+    // get the list of zones of this application
+    // result won't be returned here but on the onZonesLoaded callback below
+    @IBAction func getLastProperZoneRecords(sender: UIButton) {
+        viaBmsCtrl.getLastProperZoneRecords()
+    }
+
+    // Some codes...
+}
+
+// implement delegate of bms here
+extension ViewController: ViaBmsCtrlDelegate {
+
+    // this will be called when sdk is inited
+    // list of zones in the sdk application is passed here
+    func sdkInited(inited status: Bool, zones: [ViaZone]) {
+        print("sdk inited", status);
+
+        // this method must be called in order to enable attendance and tracking feature
+        // authorizedZones is optional field
+    // sdkInited callback will be called after initialization
+        viaBmsCtrl.initCustomer(identifier: "PASTE IDENTIFIER OF CUSTOMER HERE", email: "example@email.com", phone: "+000000000", remark: "Device info!", authorizedZones: zones);
+    }
+
+    func customerInited(inited: Bool) {
+        print("customer inited", inited);
+    }
+
+    func checkin() {
+        print("check in callback");
+    }
+
+    func checkout() {
+        print("check out callback");
+    }
+
+    // it is callback of request tracking beacons
+    func onDistanceBeacons(beacons: [IBeacon]) {
+    }
+
+    // callback when a device site is loaded, error code will be returned if failed
+    func deviceSiteLoaded(loaded: Bool, error: String?) {
+
+    }
+
+    // call on applicationWillTerminate
+    func onDestroy() {
+        print("onDestroy");
+    }
+
+    // callback when there's new proximity alert (contact) been established
+    func onNewProximityAlert(uuid: String, major: Int, minor: Int, deviceUUID: String) {
+
+    }
+
+    // callback when Bluetooth state is switched to on
+    func onBluetoothStateOn() {
+    }
+
+    // callback when Bluetooth state is switched to off
+    func onBluetoothStateOff() {
+    }
+
+    // callback when there's a new zone record added
+    // returns the uuid, major, minor of the beacon as well as the zones that the beacon is associated to
+    func onAddZoneRecord(uuid: String?, major: Int, minor: Int, newZones: [ViaZone]?) {
+    }
+
+    func onMapInited(status: Bool) {
+        print("onMapInited", status)
+        if (status) {
+            // do something when the map is initiated
+        }
+    }
+
+    func onZoneClicked(zoneName: String) {
+        // do something when a zone is clicked
+        print(zoneName, " is clicked")
+    }
+
+    // returns the zones requested by getZones
+    // zone Dictionary consists of name and zoneId parameters
+    func onZonesLoaded(zones: [Dictionary<String, Any>]) {
+        print("onZonesLoaded", zones)
+    }
+
+    // return the zone records request getLastProperZoneRecords
+    // zone record Dictionary consists of zoneRecordId, start, end, customer, zone parameters
+    // customer parameter is a Dictionary consists of customerId, identifier, email, phone
+    // zone parameter is a Dictionary consists of zoneId, name
+    func onProperZoneRecordsLoaded(zoneRecords: [Dictionary<String, Any>]) {
+        print("onProperZoneRecordsLoaded", zoneRecords)
+    }
+}
+```
