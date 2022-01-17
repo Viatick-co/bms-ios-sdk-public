@@ -60,6 +60,7 @@ public protocol ViaBmsCtrlDelegate {
   @objc public func initMap(view: UIKit.UIView!, width: CoreGraphics.CGFloat, height: CoreGraphics.CGFloat, sdk_key: Swift.String)
   @objc public func addMarker(zoneName: Swift.String, content: Swift.String)
   public func addMarkers(markers: [BmsSDK.MarkerInput])
+  public func removeMarkers(markers: [Swift.String])
   public func getZones()
   public func getLastProperZoneRecords()
   @objc public func onDestroy()
