@@ -183,6 +183,26 @@ extension ViewController: ViaBmsCtrlDelegate {
     // returns the uuid, major, minor of the beacon as well as the zones that the beacon is associated to
     func onAddZoneRecord(uuid: String?, major: Int, minor: Int, newZones: [ViaZone]?) {
     }
+
+    // callback when the map is initiated
+    func onMapInited(status: Bool) {
+    }
+
+    // callback when a zone on the map is tapped/clicked
+    func onZoneClicked(zoneName: String) {
+    }
+
+    // returns the zones requested by getZones
+    // zone Dictionary consists of name and zoneId parameters
+    func onZonesLoaded(zones: [Dictionary<String, Any>]) {
+    }
+
+    // return the zone records request getLastProperZoneRecords
+    // zone record Dictionary consists of zoneRecordId, start, end, customer, zone parameters
+    // customer parameter is a Dictionary consists of customerId, identifier, email, phone
+    // zone parameter is a Dictionary consists of zoneId, name
+    func onProperZoneRecordsLoaded(zoneRecords: [Dictionary<String, Any>]) {
+    }
 }
 ```
 
