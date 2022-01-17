@@ -23,6 +23,11 @@
 * Enable `Location updates` in `Background Modes`
 * Enable `Add the Push Notifcations...` in `Push Notifications`
 
+##### Embed Mappedin.framework (for the map)
+* Go to Targets > Build Phases > Embeded Frameworks
+* Press "+" and select "Add Other", choose "BmsSDK.framework" inside the root folder > Frameworks > Mappedin.framework
+* Make sure that "Code Sign On Copy" is ticked for Mappedin.framework
+
 ### Setup
 
 ##### Import SDK in ViewController
@@ -223,6 +228,7 @@ class ViewController: UIViewController {
     }
 
     // add a single marker
+    // should only be called after the map is initiated (status returned on onMapInited callback)
     @IBAction func addMarker(sender: UIButton) {
         // you can fully custom the html content of your marker
         viaBmsCtrl.addMarker(zoneName: "Zone A", content: "<p style=\"color: #eb4d4b;\">1</p>")
@@ -230,6 +236,7 @@ class ViewController: UIViewController {
 
     // add a group of markers
     // MarkerInput class has 2 parameters: zoneName and content. Both are String.
+    // should only be called after the map is initiated (status returned on onMapInited callback)
     @IBAction func addMarkers(sender: UIButton) {
         // you can fully custom the html content of your marker
         var markers: [MarkerInput] = []
@@ -240,12 +247,14 @@ class ViewController: UIViewController {
 
     // get the list of zones of this application
     // result won't be returned here but on the onZonesLoaded callback below
+    // should only be called after the map is initiated (status returned on onMapInited callback)
     @IBAction func getZones(sender: UIButton) {
         viaBmsCtrl.getZones()
     }
 
     // get the list of zones of this application
     // result won't be returned here but on the onZonesLoaded callback below
+    // should only be called after the map is initiated (status returned on onMapInited callback)
     @IBAction func getLastProperZoneRecords(sender: UIButton) {
         viaBmsCtrl.getLastProperZoneRecords()
     }
@@ -311,6 +320,7 @@ extension ViewController: ViaBmsCtrlDelegate {
     func onAddZoneRecord(uuid: String?, major: Int, minor: Int, newZones: [ViaZone]?) {
     }
 
+    // callback when the map is initiated
     func onMapInited(status: Bool) {
         print("onMapInited", status)
         if (status) {
@@ -318,6 +328,7 @@ extension ViewController: ViaBmsCtrlDelegate {
         }
     }
 
+    // callback when a zone on the map is tapped/clicked
     func onZoneClicked(zoneName: String) {
         // do something when a zone is clicked
         print(zoneName, " is clicked")
