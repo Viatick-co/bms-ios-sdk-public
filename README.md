@@ -265,6 +265,12 @@ class ViewController: UIViewController {
         viaBmsCtrl.addMarkers(markers: markers)
     }
 
+    // remove a group of markers
+    // input is an array of zone names
+    @IBAction func removeMarkers(sender: UIButton) {
+        viaBmsCtrl.removeMarkers(markers: ["Zone A", "Zone B"])
+    }
+
     // get the list of zones of this application
     // result won't be returned here but on the onZonesLoaded callback below
     // should only be called after the map is initiated (status returned on onMapInited callback)
