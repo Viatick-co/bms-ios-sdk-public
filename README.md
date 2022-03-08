@@ -235,23 +235,19 @@ class ViewController: UIViewController {
     }
 
     // add a single marker
-    @IBAction func addMarker(sender: UIButton) {
-        // these methods are to check sdk initation and bms is running or not
-        let bmsRunning = viaBmsCtrl.isBmsRunning();
-        let sdkInited = viaBmsCtrl.isSdkInited();
-
-        if (!bmsRunning && sdkInited) {
-            // this method is to start bms service if it is not running
-            // you can call this method to restart without calling initSdk again
-            viaBmsCtrl.startBmsService();
-        }
-    }
-
-    // add a single marker
     // should only be called after the map is initiated (status returned on onMapInited callback)
     @IBAction func addMarker(sender: UIButton) {
         // you can fully custom the html content of your marker
         viaBmsCtrl.addMarker(zoneName: "Zone A", content: "<p style=\"color: #eb4d4b;\">1</p>")
+    }
+
+    // you can also use addMarker to have a "blue dot" like marker to visualize a user's current zone
+    // possibly onAddZoneRecord callback can be used to retrieve the zone to be visualized
+    // We provided you a sample HTML content for a blue dot at ViaBmsCtrl.BLUEDOT_CONTENT
+    // Refer to blueDotSimulation function on bms-sdk-ios-map-example for sample
+    @IBAction func addBlueDot(sender: UIButton) {
+        // you can fully custom the html content of your marker
+        viaBmsCtrl.addMarker(zoneName: "Zone A", content: ViaBmsCtrl.BLUEDOT_CONTENT)
     }
 
     // add a group of markers
